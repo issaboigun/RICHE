@@ -8,7 +8,7 @@ export async function POST(req: Request) {
     const { customerName, customerEmail, customerPhone, address, city, total, items } = body;
 
     // 1. Create order in our database first (PENDING)
-    const order = await prisma.$transaction(async (tx) => {
+    const order = await prisma.$transaction(async (tx: any) => {
       const newOrder = await tx.order.create({
         data: {
           customerName,
