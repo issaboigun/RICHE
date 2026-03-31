@@ -35,6 +35,7 @@ model Order {
   customerName  String
   customerEmail String
   customerPhone String      @default("")
+  customerAddress String
   paymentMethod String      @default("CASH_ON_DELIVERY") // CASH_ON_DELIVERY, PAYMOB
   paymobId      String?     @unique
   total         Float
