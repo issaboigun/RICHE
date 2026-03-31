@@ -7,7 +7,7 @@ export async function POST(req: Request) {
     const { customerName, customerEmail, customerPhone, total, items, paymentMethod } = body;
 
     // Use a transaction to ensure both order and items are created
-    const order = await prisma.$transaction(async (tx) => {
+    const order = await prisma.$transaction(async (tx: any) => {
       const newOrder = await tx.order.create({
         data: {
           customerName,
