@@ -7,6 +7,7 @@ type OrderWithCount = {
   customerName: string;
   customerEmail: string;
   customerPhone: string;
+  customerAddress: string;
   paymentMethod: string;
   paymobId: string | null;
   total: number;
@@ -65,7 +66,7 @@ export default async function OrdersPage() {
               </div>
               <div>
                 <p className="text-xs font-black text-black">{order.customerName}</p>
-                <p className="text-xs text-gray-600 font-bold">{order.customerEmail}</p>
+                <p className="text-xs text-gray-600 font-bold">{order.customerPhone}</p>
               </div>
               <div className="flex justify-between">
                 <div>

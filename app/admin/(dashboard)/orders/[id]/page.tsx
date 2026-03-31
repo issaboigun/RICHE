@@ -96,6 +96,10 @@ export default async function OrderDetailsPage({ params }: { params: Promise<{ i
                 <p className="text-xs sm:text-sm font-black text-black">{order.customerPhone}</p>
               </div>
               <div>
+                <p className="text-[10px] font-black uppercase tracking-widest text-gray-500">Address</p>
+                <p className="text-xs sm:text-sm font-black text-black">{order.customerAddress}</p>
+              </div>
+              <div>
                 <p className="text-[10px] font-black uppercase tracking-widest text-gray-500">Order Date</p>
                 <p className="text-xs sm:text-sm font-black text-black">{new Date(order.createdAt).toLocaleString()}</p>
               </div>
