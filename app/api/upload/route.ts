@@ -1,6 +1,5 @@
+import { put } from '@vercel/blob';
 import { NextResponse } from 'next/server';
-import { writeFile } from 'fs/promises';
-import { join } from 'path';
 
 export async function POST(req: Request) {
   try {
@@ -11,19 +10,18 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'No file uploaded' }, { status: 400 });
     }
 
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
-
-    // Create unique filename
+    // تجهيز اسم فريد للملف
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    const filename = uniqueSuffix + '-' + file.name.replace(/\s+/g, '-');
-    
-    // Save to public/uploads
-    const path = join(process.cwd(), 'public', 'uploads', filename);
-    await writeFile(path, buffer);
+    const filename = `${uniqueSuffix}-${file.name.replace(/\s+/g, '-')}`;
 
-    // Return the public URL
-    return NextResponse.json({ url: `/uploads/${filename}` });
+    // الرفع مباشرة إلى Vercel Blob بدلاً من السيرفر المحلي
+    const blob = await put(filename, file, {
+      access: 'public', // عشان الصور تكون متاحة للجميع
+    });
+
+    // برجع رابط الصورة الجديد (URL) اللي Vercel عطاهولنا
+    return NextResponse.json({ url: blob.url });
+    
   } catch (error) {
     console.error('Error uploading file:', error);
     return NextResponse.json({ error: 'Upload failed' }, { status: 500 });
