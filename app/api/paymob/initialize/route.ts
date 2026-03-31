@@ -5,7 +5,7 @@ import { getPaymobAuthToken, createPaymobOrder, getPaymentKey } from '@/lib/paym
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { customerName, customerEmail, customerPhone, address, city, total, items } = body;
+    const { customerName, customerEmail, customerPhone, customerAddress, city, total, items } = body;
 
     // 1. Create order in our database first (PENDING)
     const order = await prisma.$transaction(async (tx: any) => {
@@ -14,6 +14,7 @@ export async function POST(req: Request) {
           customerName,
           customerEmail,
           customerPhone,
+          customerAddress,
           total,
           status: 'PENDING',
           paymentMethod: 'PAYMOB',
@@ -56,7 +57,7 @@ export async function POST(req: Request) {
       phone_number: customerPhone,
       apartment: 'NA',
       floor: 'NA',
-      street: address,
+      street: customerAddress,
       building: 'NA',
       shipping_method: 'PKG',
       postal_code: 'NA',
