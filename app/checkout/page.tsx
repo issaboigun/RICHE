@@ -13,7 +13,7 @@ export default function CheckoutPage() {
     customerName: '',
     customerEmail: '',
     customerPhone: '',
-    address: '',
+    customerAddress: '',
     city: '',
     paymentMethod: 'CASH_ON_DELIVERY',
   });
@@ -143,8 +143,8 @@ export default function CheckoutPage() {
                 <input
                   type="text"
                   required
-                  value={formData.address}
-                  onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                  value={formData.customerAddress}
+                  onChange={(e) => setFormData({ ...formData, customerAddress: e.target.value })}
                   className="w-full px-4 py-3 sm:py-4 border border-gray-300 rounded-sm focus:outline-none focus:border-black transition-colors text-black font-bold bg-white text-base sm:text-sm"
                   placeholder="Street name, Building number"
                 />
